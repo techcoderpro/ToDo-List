@@ -1,46 +1,25 @@
-import React, { useState } from 'react';
+import Menu from "./components/Menu";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from "./components/Home";
+import About from './components/About';
+import Service from './components/Service';
+
 
 function App() {
-  const [task, setTask] = useState('');
-  const [data, setData] = useState([]);
-
-
+  
   return (
-    <div className='m-10'>
-      <div className="border-2 border-slate-600/50 w-[35%] p-2 ">
-        <h1>Create a task</h1>
-        <input
-          className="border-2 border-black pl-2"
-          placeholder="Enter a task"
-          value={task}
-          type="text"
-          onChange={function (e) {
-            setTask(e.target.value);
-          
-          }}
-        />
-        <br />
-        <button className="bg-green-700 py-1 px-4 rounded-md mt-2 text-white" onClick={function () {
-          console.log({ task });
-          setData([...data, task]);
-          setTask('');
-        }}>
-          Submit
-        </button>
+    <BrowserRouter>
+      <div className="m-10">
+        <div className="py-5 border-3 border border-black/30">
+          <Menu />
+        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/service" element={<Service />} />
+        </Routes>
       </div>
-
-      <div className="border-2 border-slate-600/50 w-[35%] p-2 my-6 ">
-        {
-          data.map(function (item) {
-            return (
-              <div>
-                <h2>{item}</h2>
-              </div>
-            )
-          })
-        }
-      </div>
-    </div>
-  )
+    </BrowserRouter>
+  );
 }
 export default App;
